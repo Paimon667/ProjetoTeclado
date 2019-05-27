@@ -18,7 +18,7 @@ public class Inicio extends JPanel {
 	Box[] teclado;
 	JPanel baixo;
 	JTextArea cima;
-	JPanel meio;		//UMA ARRAY COM AS TECLAS ESPECIAIS, TEM O CÓDIGO DELA PRA PROCURAR E A POSIÇÃO DELA PRA RETORNAR
+	JPanel meio;		//UMA ARRAY COM AS TECLAS ESPECIAIS, TEM O CODIGO DELA PRA PROCURAR E A POSICAOO DELA PRA RETORNAR
 	String[][] especiais = {{"131","0"},{"45","11"},{"107","12"},{"9","14"},{"91","25"},{"93","26"},{"92","27"},{"20","28"},
 			{"59","38"},{"106","39"},{"10","40"},{"16","41"},{"44","49"},{"46","50"},{"47","51"},{"38","52"},{"32","53"},{"37","54"},{"40","55"},{"39","56"}
 	};
@@ -26,23 +26,23 @@ public class Inicio extends JPanel {
 	public Inicio() {
 		setLayout(new BorderLayout());
 
-		cima = new JTextArea(10, 60); // Instanciando e adicionando a �rea de texto ao topo panel principal
-		cima.setEditable(false); // deixando inedit�vel
+		cima = new JTextArea(10, 60); // Instanciando e adicionando a area de texto ao topo do panel principal
+		cima.setEditable(false); // deixando ineditavel
 
-		teclado = new Box[5]; // Instanciando a array de boxes
-		botoes = new JButton[57]; // Instanciando a array de bot�es
+		teclado = new Box[5]; // Instanciando a array de boxes (onde cada um e uma linha do teclado)
+		botoes = new JButton[57]; // Instanciando a array de botoes
 
-		baixo = new JPanel(new GridLayout(5, 1, 6, 6)); // Instanciando o panel onde ser�o colocados os boxes de teclas
+		baixo = new JPanel(new GridLayout(5, 1, 6, 6)); // Instanciando o panel onde serao colocados os boxes de teclas
 
 		for (int i = 0; i < 5; i++) {
-			teclado[i] = Box.createHorizontalBox(); // Instanciando cada box e atribuindo-o � sua posi��o da array de
+			teclado[i] = Box.createHorizontalBox(); // Instanciando cada box e atribuindo-o a sua posicao da array de
 													// box
 		}
 
-		for (int i = 0; i < botoes.length; i++) { // instanciando os bot�es e armazenando-os na array de bot�es e
+		for (int i = 0; i < botoes.length; i++) { // instanciando os botoes e armazenando-os na array de botoes e
 													// adicionando-os aos seus respectivos boxes
 
-			botoes[i] = new JButton(palavras[i]); // CADA BOX � UMA LINHA DO TECLADO
+			botoes[i] = new JButton(palavras[i]); // CADA BOX E UMA LINHA DO TECLADO
 
 			if (i < 14) {
 				teclado[0].add(botoes[i]);
@@ -55,11 +55,11 @@ public class Inicio extends JPanel {
 				teclado[2].add(Box.createHorizontalStrut(6));
 			} else if (i < 53) {
 				if (i == 52) {
-					teclado[3].add(Box.createHorizontalStrut(54));
+					teclado[3].add(Box.createHorizontalStrut(17));
 				}
 				teclado[3].add(botoes[i]);
 				teclado[3].add(Box.createHorizontalStrut(6));
-			} else { // A ULTIMA LINHA � DIFERENTE, ENT�O TEM VARIOS IF
+			} else {  // A ultima linha do teclado possui caracteristicas diferentes das demais
 				if (i == 53) {
 					teclado[4].add(Box.createHorizontalStrut(200));
 				} else if (i == 54) {
@@ -71,13 +71,14 @@ public class Inicio extends JPanel {
 
 		} //////////////////// FIM DOS BOTOES
 
-		for (int i = 0; i < 5; i++) { // Adicionando os boxes das teclas ao panel
+		for (int i = 0; i < 5; i++) { // Adicionando os boxes das teclas ao panel baixo, onde fica o teclado
 			baixo.add(teclado[i]);
 		}
 
 		add(cima, BorderLayout.NORTH); // Adicionando a area de texto ao panel principal
-		add(baixo, BorderLayout.SOUTH); // Adicionando o panel baixo ao panel principal
-		meio = new JPanel(new BorderLayout());
+		add(baixo, BorderLayout.SOUTH); // Adicionando o panel baixo ao panel principal (teclado)
+		meio = new JPanel(new BorderLayout()); // Panel onde vai ficar o resultado e tambem o pangrama a ser digitado
+						
 		add(meio, BorderLayout.CENTER);
 	}
 
@@ -93,7 +94,7 @@ public class Inicio extends JPanel {
 		}
 		if(achei==false) {
 			for(i=0;i<especiais.length;i++) {
-				if(a.getKeyCode()==Integer.parseInt(especiais[i][0])) {	//COLUNA 0 TEM O CODIGO DO BOTAO PRA COMPRAR
+				if(a.getKeyCode()==Integer.parseInt(especiais[i][0])) {	//COLUNA 0 TEM O CODIGO DO BOTAO PRA COMPARAR
 					i=Integer.parseInt(especiais[i][1]);				// COLUNA 1 TEM A POSICAO NA ARRAY DE BOTOES
 					achei=true;
 					break;
