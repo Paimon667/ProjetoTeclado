@@ -35,6 +35,7 @@ public class Historico extends JPanel implements Serializable {
 						
 						try {
 						ler = new ObjectInputStream(new FileInputStream("arquivo.ser"));
+						texto.setText("");
 						
 						while(true) {
 							
