@@ -19,10 +19,8 @@ public class Inicio extends JPanel {
 	JPanel baixo;
 	JTextArea cima;
 	JPanel meio;		//UMA ARRAY COM AS TECLAS ESPECIAIS, TEM O CODIGO DELA PRA PROCURAR E A POSICAOO DELA PRA RETORNAR
-	String[][] especiais = {{"131","0"},{"45","11"},{"107","12"},{"9","14"},{"91","25"},{"93","26"},{"92","27"},{"20","28"},
-			{"59","38"},{"106","39"},{"10","40"},{"16","41"},{"44","49"},{"46","50"},{"47","51"},{"38","52"},{"32","53"},{"37","54"},{"40","55"},{"39","56"}
-	};
-
+	String[][] especiais = {{"131","0"},{"45","11"},{"107","12"},{"91","25"},{"93","26"},{"92","27"},{"20","28"},
+			{"59","38"},{"106","39"},{"10","40"},{"16","41"},{"44","49"},{"46","50"},{"47","51"},{"38","52"},{"32","53"},{"37","54"},{"40","55"},{"39","56"}};
 	public Inicio() {
 		setLayout(new BorderLayout());
 
@@ -101,7 +99,12 @@ public class Inicio extends JPanel {
 				}
 			}
 		}
-
+		else if(achei==false) {
+			if(a.getKeyCode()==KeyEvent.VK_TAB) {
+				i=14;
+				achei=true;
+			}
+		}
 		return achei? i:-1;
 	}
 
