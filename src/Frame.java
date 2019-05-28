@@ -60,6 +60,7 @@ public class Frame extends JFrame {
 		abas.addTab("Teste Pangrama", testepangrama);
 		abas.addTab("Historico", historico);
 		this.add(abas);
+		inicio.cima.setFocusTraversalKeysEnabled(false);
 		
 	}
 
