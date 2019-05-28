@@ -30,11 +30,13 @@ public class Frame extends JFrame {
 
 
 	public Frame() {
-		super("Titulo");
+		super("Projeto Teclado");
 		inicio = new Inicio();
+		
 		panDigitar = new JLabel(); // LABEL COMPARTILHADO
 
 		panDigitar.setText(panPadrao);
+		
 		
 		historico = new Historico();
 
@@ -58,6 +60,7 @@ public class Frame extends JFrame {
 		abas.addTab("Teste Pangrama", testepangrama);
 		abas.addTab("Historico", historico);
 		this.add(abas);
+		
 	}
 
 	public class AcaoRadio implements ItemListener { // ACAO Q MUDA O LABEL DO PAN DIGITAR
@@ -91,6 +94,7 @@ public class Frame extends JFrame {
 		}
 
 		public void keyPressed(KeyEvent e) {  // primeiro checa se encontrou o botao, caso nao, lanca uma excecao e da erro
+			
 			try {							  // ARMAZENA A POSICAO DO BOTAO NA VARIAVEL VARIAVEL	
 				int variavel = inicio.ProcurarBotao(e);
 				
@@ -129,7 +133,7 @@ public class Frame extends JFrame {
 						if (variavel == 28 || variavel == 41 || variavel == 13) {
 							//SE ESSA TECLA FOR SHIFT, BACKSPACE E CAPS LOCK ELE NAO DA ERRO, SOMENTE FAZ SUA FUNCAO
 							inicio.botoes[variavel].setBackground(Color.black);
-							if(variavel==13) {
+							if(variavel==13&&TeclaAtual>0) {
 							//SE FOR BACSKPACE ELE APAGA O DIGITO ANTERIOR E DECREMENTA A TECLA ATUAL DO PANGRAMA
 							// NAO DESCONSIDERA O ERRO CASO TENHA OCORRIDO, MESMO TERMINANDO O PANGRAMA, VAI DAR DIGITADO INCORRETAMENTE
 								inicio.cima.setText(inicio.cima.getText().substring(0, inicio.cima.getText().length()-1));
@@ -149,20 +153,17 @@ public class Frame extends JFrame {
 				else {
 					
 					if(TeclaAtual>0) { 
-						System.out.println(TeclaAtual);
 						//SE O TAMANHO DA FRASE DIGITADA FOR IGUAL DO PANGRAMA E NAO HOUVE ERRO, ELE DIZ FRASE CORRETA
 						// ELE SO VEM PRA CA CASO ENTER SEJA PRESSIONADO (QUE SETA VALOR 999 A TeclaAtual) ou caso termine o pangrama
 						acertos.setText("Acertos: "+Acertos+" Erros: "+Erros);
 						String extra=(Erros==0 && TeclaAtual==panDigitar.getText().length())? " A frase foi digitada corretamente":" A frase nao foi digitada corretamente";
 						acertos.setText(acertos.getText()+extra);
 						historico.Escrever(inicio.cima.getText());
-						
-					
-					panDigitar.setText(panPadrao);
-					TeclaAtual = 0;
-					inicio.cima.setText("");
-					Acertos=0;
-					Erros=0;
+					    panDigitar.setText(panPadrao);
+					    TeclaAtual = 0;
+					    inicio.cima.setText("");
+					    Acertos=0;
+					    Erros=0;
 					}
 					
 				}
@@ -172,7 +173,6 @@ public class Frame extends JFrame {
 			catch (Exception x) {
 				JOptionPane.showMessageDialog(null, "Tecla Invalida !!!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-
 		}
 
 		public void keyReleased(KeyEvent e) {
@@ -196,7 +196,6 @@ public class Frame extends JFrame {
 		f.setVisible(true);
 		f.setSize(750, 420);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-		f.setResizable(true);
 	}
 
 }
