@@ -25,42 +25,7 @@ public class Historico extends JPanel implements Serializable {
 		
 		setLayout(new BorderLayout());
 		texto = new JTextArea(50, 50);
-		carregar = new JButton("Carregar");
-		carregar.addActionListener(
-				
-				new ActionListener() {
-
-					
-					public void actionPerformed(ActionEvent e) {
-						
-						try {
-						ler = new ObjectInputStream(new FileInputStream("arquivo.ser"));
-						texto.setText("");
-						
-						while(true) {
-							
-							texto.setText(texto.getText()+"\n"+ler.readObject());
-							
-						}
-						
-					}
-						catch(IOException a) {
-							
-						}
-						
-						catch(ClassNotFoundException b) {
-							
-						}
-						
-					}
-					
-					
-				}
-				
-				
-				);
 		texto.setEditable(false);
-		add(carregar,BorderLayout.SOUTH);
 		add(texto,BorderLayout.NORTH);
 		try {
 			escrever = new ObjectOutputStream(new FileOutputStream("arquivo.ser"));
@@ -75,10 +40,27 @@ public class Historico extends JPanel implements Serializable {
 	public void Escrever(String a) {
 		try {
 		escrever.writeObject(a);
+		Ler();
 		}
 		catch(IOException errin) {
 			
 		}
+	}
+	public void Ler() {
+		try {
+		ler = new ObjectInputStream(new FileInputStream("arquivo.ser"));
+		texto.setText("");
+		while(true) {
+			texto.setText(texto.getText()+"\n"+ler.readObject());
+		}
+		}
+		catch(IOException erro) {
+			
+		}
+		catch(ClassNotFoundException erro) {
+			
+		}
+		
 	}
 	
 
